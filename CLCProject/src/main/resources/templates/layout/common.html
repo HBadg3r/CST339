@@ -10,6 +10,9 @@
       <div th:fragment="header">
           <div class="bs-example">
               <nav class="navbar navbar-default">
+				<!-- Page Title and Logo -->
+				<h2 th:text="${title}">Default Message Text</h2>
+				<img class="logo" src="http://localhost:8080/images/logo.png"/><br/><br/>
                   <div class="navbar-header">
                       <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
                           <span class="sr-only">Toggle navigation</span>
@@ -17,7 +20,7 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                       </button>
-                      <a th:href="@{/}" class="navbar-brand">TBD</a>
+                      <a th:href="@{/}" class="navbar-brand">5 O'Clock Somewhere</a>
                   </div>
                   <!-- Collection of nav links and other content for toggling -->
                   <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -35,11 +38,7 @@
                           <li><a th:href="@{/register}">Register</a></li>
                       </ul>
                   </div>
-                  
-                  <!-- Page Title and Logo -->
-                  <h2 th:text="${title}">Default Message Text</h2>
-                  <img th:src="@{/images/gcu-logo.jpg}"/><br/><br/>
-              </nav>
+              </nav> 
           </div>
           
           <!-- Common Footer Fragment -->

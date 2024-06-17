@@ -20,14 +20,14 @@ public class MainController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("title", "Login");
-        //model.addAttribute("loginModel", new LoginModel());
+        model.addAttribute("loginModel", new LoginModel());
         return "login";
     }
     
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("title", "Register");
-        //model.addAttribute("registrationModel", new RegistrationModel());
+        model.addAttribute("registrationModel", new RegistrationModel());
         return "register";
     }
 }

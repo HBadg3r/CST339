@@ -1,11 +1,14 @@
 <!DOCTYPE html>
+<!-- TEST PAGE INTENDED TO BE REPLACED -->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/defaultTemplate" lang="en">
   <head>
     <meta charset="UTF-8">
     <title>CLCProject</title>
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+
   </head>
   
-  <body>
+  <body layout:fragment="content">
     <h1> Test </h1>
   </body>
 </html>
