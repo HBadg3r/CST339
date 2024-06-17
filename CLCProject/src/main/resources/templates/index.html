@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/defaultTemplate" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>CLCProject</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body layout:fragment="content">
+	<div class="container mt-5">
+		<div class="jumbotron text-center vintage-jumbotron">
+			<h1>Welcome to [Bar Name]</h1>
+			<p>Slogan! Lorum ipsum </p>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12">
+				<h2 class="section-title">Featured Items</h2>
+				<div class="card vintage-card mb-3">
+					<img src="item1.jpg" class="card-img-top" alt="Item 1">
+					<div class="card-body">
+						<h5 class="card-title">Vintage Wine</h5>
+						<p class="card-text">Aged to perfection, our vintage wine offers a rich and smooth flavor.
+						</p>
+					</div>
+				</div>
+				<div class="card vintage-card mb-3">
+					<img src="item2.jpg" class="card-img-top" alt="Item 2">
+					<div class="card-body">
+						<h5 class="card-title">Classic Whiskey</h5>
+						<p class="card-text">Enjoy the timeless taste of our finest classic whiskey.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<h2 class="section-title">Specials of the Day</h2>
+				<div class="card vintage-card mb-3">
+					<img src="special1.jpg" class="card-img-top" alt="Special 1">
+					<div class="card-body">
+						<h5 class="card-title">Cocktail of the Day</h5>
+						<p class="card-text">Try our bartender's special cocktail of the day, a refreshing blend of
+							flavors.</p>
+					</div>
+				</div>
+				<div class="card vintage-card mb-3">
+					<img src="special2.jpg" class="card-img-top" alt="Special 2">
+					<div class="card-body">
+						<h5 class="card-title">Gourmet Snack</h5>
+						<p class="card-text">Pair your drink with our special gourmet snack, crafted to complement
+							your drink perfectly.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
