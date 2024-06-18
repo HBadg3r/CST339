@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align:center">Register</h2>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" th:field="*{firstName}" class="form-control"/><br/>
+                <h5 style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Required</h5>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" th:field="*{lastName}" class="form-control"/><br/>
+                <h5 style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Required</h5>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" class="form-control"/><br/>
+                <h5 style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Required</h5>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control"/><br/>
+                <h5 style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone Number Required</h5>
+            </div>
+            <div class="form-group">
+                <label for="userName">Username</label>
+                <input type="text" id="userName" th:field="*{userName}" class="form-control"/><br/>
+                <h5 style="color:red" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Required</h5>
+            </div>
+            <div class="form-group">
+                <label for="passWord">Password</label>
+                <input type="passWord" id="passWord" th:field="*{passWord}" class="form-control"/><br/>
+                <h5 style="color:red" th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}">Password Required</h5>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+            <div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+    		<div th:each="err : ${#fields.errors('*')}">
+    		<span style="color:red" th:text="${err}" class="fieldError"></span>
+    	</div>
+        </form>
+    </div>
+</body>
+</html>
