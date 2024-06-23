@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>LogIn Module</title>
+</head>
+<body>
+	<h1 align ="center"> 5oCLOCK SOMEWHERE</h1>
+	
+	<form align ="center" th:action="@{/login}" th:object="${loginForm}" method="post">
+		<label for="username"> USERNAME</label>
+		<input type="text" id="username" name="username" autofocus="autofocus"/>
+		
+		<label for="password"> PASSWORD</label>
+		<input type="password" id="password" name="password" />
+		<br/>
+		<input type="submit" value="Log In" />
+	</form>
+</body>
+</html>

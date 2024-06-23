@@ -33,10 +33,18 @@
                           <li><a th:href="@{../contact}">Contact Us</a></li>
                           <li><a th:href="@{../account}">User Account</a></li>
                       </ul>
-                      <ul class="nav navbar-nav navbar-right">
-                          <li><a th:href="@{../login}">Log In</a></li>
-                          <li><a th:href="@{/register}">Register</a></li>
-                      </ul>
+					  <ul class="nav navbar-nav navbar-right">
+					          <!-- Conditionally render items based on the presence of 'name' -->
+					          <li th:if="${name}">
+					              Hello <span th:text="${name}">Customer Name</span>!
+					          </li>
+					          <li th:if="${name == null}">
+					              <a th:href="@{../login}">Log In</a>
+					          </li>
+					          <li th:if="${name == null}">
+					              <a th:href="@{/register}">Register</a>
+					          </li>
+					      </ul>
                   </div>
               </nav> 
           </div>

@@ -1,11 +1,11 @@
-package com.gcu.service;
+package com.gcu.form;
 
-public class LoginService 
+public class LogInForm 
 {
 	private String username;
 	private String password;
 	
-	public LoginService() {
+	public LogInForm() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

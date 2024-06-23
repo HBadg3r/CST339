@@ -4,7 +4,7 @@ body {
     color: #333;
     margin-left: auto;
     margin-right: auto;
-    max-width: 960px;
+    max-width: 1028px;
     width: 95%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     padding-bottom: 100px;
@@ -12,7 +12,7 @@ body {
 .container {
 	margin-left: auto;
     margin-right: auto;
-    max-width: 960px;
+    max-width: 1028px;
     width: 95%;
     padding: 15px;
 }
@@ -74,7 +74,7 @@ p {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    max-width: 960px;
+    max-width: 1028px;
     width: 95%;
 }
 

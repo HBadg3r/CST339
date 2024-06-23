@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gcu.model.LoginModel;
 import com.gcu.model.RegistrationModel;
+import com.gcu.service.LoginService;
 
 import jakarta.validation.Valid;
 
@@ -25,11 +26,26 @@ public class MainController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("title", "Login");
-        model.addAttribute("loginModel", new LoginModel());
         return "login";
     }
     
-
+    @PostMapping("/login")
+	public String login(@ModelAttribute(name="LoginForm") LoginService loginForm, Model model)
+	{
+		String username = loginForm.getUsername();
+		String password = loginForm.getPassword();
+		
+		if("admin".equals(username) && "admin".equals(password))
+		{
+			return "home";
+		}
+		
+		model.addAttribute("invalidLogIn",true);
+		model.addAttribute("loggedIn", true);
+		model.addAttribute("name", username);
+		return "index";
+	}
+    
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new RegistrationModel());

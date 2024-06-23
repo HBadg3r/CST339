@@ -9,7 +9,15 @@
 
   </head>
   
-  <body layout:fragment="content">
-    <h1> Test </h1>
+  <body layout:fragment="content">		
+		<form align ="center" th:action="@{/login}" th:object="${loginForm}" method="post">
+			<label for="username"> USERNAME</label>
+			<input type="text" id="username" name="username" autofocus="autofocus"/>
+			
+			<label for="password"> PASSWORD</label>
+			<input type="password" id="password" name="password" />
+			<br/>
+			<input type="submit" value="Log In" />
+		</form>
   </body>
 </html>
