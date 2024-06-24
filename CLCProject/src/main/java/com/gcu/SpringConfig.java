@@ -12,4 +12,9 @@ public class SpringConfig {
 	public MenuServiceInterface MenuService() {
 		return new MenuService();
 	}
+	
+	@Bean(initMethod="init", destroyMethod="destroy")
+	public UserServiceInterface userService() {
+		return new UserService();
+	}
 }

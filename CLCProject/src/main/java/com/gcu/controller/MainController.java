@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.gcu.model.ProductModel;
 import com.gcu.model.RegistrationModel;
+import com.gcu.model.UserModel;
 import com.gcu.service.LoginService;
 import com.gcu.service.MenuServiceInterface;
+import com.gcu.service.UserServiceInterface;
 
 import jakarta.validation.Valid;
 
@@ -19,8 +21,11 @@ import jakarta.validation.Valid;
 public class MainController {
 
 	@Autowired
-	private MenuServiceInterface service;
-
+	private MenuServiceInterface menuService;
+	
+	@Autowired
+    private UserServiceInterface userService;
+	
 	@GetMapping("/")
 	public String home(Model model) {
 	    model.addAttribute("title", "Home");
@@ -36,10 +41,10 @@ public class MainController {
 	@GetMapping("/menu")
 	public String menu(Model model) {
 		
-		service.test();
+		menuService.test();
 		
 	    model.addAttribute("title", "Menu");
-	    model.addAttribute("menuItems", service.getMenuItems());
+	    model.addAttribute("menuItems", menuService.getMenuItems());
 	    return "menu";
 	}
 
@@ -80,7 +85,7 @@ public class MainController {
 	    if (bindingResult.hasErrors()) {
 	        return "admin"; // return to the same page with errors
 	    }
-	    service.updateMenu(product);
+	    menuService.updateMenu(product);
 	    return "admin"; // redirect to the admin page after successful addition
 
 	}
@@ -93,10 +98,13 @@ public class MainController {
 	}
 
 	@PostMapping("/register")
-	public String registerUser(@Valid @ModelAttribute("user") RegistrationModel user, BindingResult bindingResult) {
+	public String registerUser(@Valid @ModelAttribute("user") UserModel user, BindingResult bindingResult) {
 	    if (bindingResult.hasErrors()) {
 	        return "register";
 	    }
+	    
+	    userService.register(user);
+	    
 	    return "redirect:/register?success";
 	}
 }
