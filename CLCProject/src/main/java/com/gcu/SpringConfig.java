@@ -9,12 +9,18 @@ import com.gcu.service.*;
 public class SpringConfig {
 
 	@Bean(name="menuService", initMethod="init", destroyMethod="destroy")
-	public MenuServiceInterface MenuService() {
-		return new MenuService();
+	public ProductServiceInterface MenuService() {
+		return new ProductService();
 	}
 	
 	@Bean(initMethod="init", destroyMethod="destroy")
-	public UserServiceInterface userService() {
-		return new UserService();
+	public RegistrationServiceInterface userService() {
+		return new RegistrationService();
 	}
+	
+	@Bean(initMethod="init", destroyMethod="destroy")
+	public LoginServiceInterface loginService() {
+		return new LoginService();
+	}
+	
 }

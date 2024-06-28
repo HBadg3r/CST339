@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.gcu.model.ProductModel;
-import com.gcu.model.RegistrationModel;
 import com.gcu.model.UserModel;
 import com.gcu.service.LoginService;
-import com.gcu.service.MenuServiceInterface;
-import com.gcu.service.UserServiceInterface;
+import com.gcu.service.LoginServiceInterface;
+import com.gcu.service.ProductServiceInterface;
+import com.gcu.service.RegistrationServiceInterface;
 
 import jakarta.validation.Valid;
 
@@ -21,10 +21,13 @@ import jakarta.validation.Valid;
 public class MainController {
 
 	@Autowired
-	private MenuServiceInterface menuService;
+	private ProductServiceInterface productService;
 	
 	@Autowired
-    private UserServiceInterface userService;
+    private RegistrationServiceInterface registerService;
+	
+	@Autowired
+	private LoginServiceInterface loginService;
 	
 	@GetMapping("/")
 	public String home(Model model) {
@@ -41,10 +44,10 @@ public class MainController {
 	@GetMapping("/menu")
 	public String menu(Model model) {
 		
-		menuService.test();
+		productService.test();
 		
 	    model.addAttribute("title", "Menu");
-	    model.addAttribute("menuItems", menuService.getMenuItems());
+	    model.addAttribute("menuItems", productService.getProductItems());
 	    return "menu";
 	}
 
@@ -66,15 +69,19 @@ public class MainController {
 		String username = loginForm.getUsername();
 		String password = loginForm.getPassword();
 		
-		if("admin".equals(username) && "admin".equals(password))
-		{
-			model.addAttribute("admin", true);
+		if (loginService.authenticate(username, password)) {
+			if("admin".equals(username) && "admin".equals(password))
+			{
+				model.addAttribute("admin", true);
+				model.addAttribute("name", username);
+				return "index";
+			}
 			model.addAttribute("name", username);
-			return "index";
+		} else {
+			model.addAttribute("error", "User does not exist!");
+			return "login";
 		}
 		
-		model.addAttribute("loggedIn", true);
-		model.addAttribute("name", username);
 		return "index";
 	}
 
@@ -85,7 +92,7 @@ public class MainController {
 	    if (bindingResult.hasErrors()) {
 	        return "admin"; // return to the same page with errors
 	    }
-	    menuService.updateMenu(product);
+	    productService.updateProducts(product);
 	    return "admin"; // redirect to the admin page after successful addition
 
 	}
@@ -93,17 +100,21 @@ public class MainController {
 
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
-	    model.addAttribute("user", new RegistrationModel());
+	    model.addAttribute("user", new UserModel());
 	    return "register";
 	}
 
 	@PostMapping("/register")
-	public String registerUser(@Valid @ModelAttribute("user") UserModel user, BindingResult bindingResult) {
+	public String registerUser(@Valid @ModelAttribute("user") UserModel user, BindingResult bindingResult, Model model) {
 	    if (bindingResult.hasErrors()) {
 	        return "register";
 	    }
 	    
-	    userService.register(user);
+	    if (registerService.authenticate(user, loginService)) {
+		    registerService.register(user, loginService);
+	    } else {
+	    	model.addAttribute("error", "User already exists!");
+	    }
 	    
 	    return "redirect:/register?success";
 	}

@@ -9,6 +9,7 @@
   
   <body layout:fragment="content">
 	<div class="container">
+			<h3 th:if="${error}">Error: <span th:text="${name}">Error Message</span></h3>
 	        <h2 style="text-align:center">Register</h2>
 	        <form th:action="@{/register}" th:object="${user}" method="post">
 	            <div class="form-group">
@@ -38,7 +39,7 @@
 	            </div>
 	            <div class="form-group">
 	                <label for="passWord">Password</label>
-	                <input type="passWord" id="passWord" th:field="*{passWord}" class="form-control"/><br/>
+	                <input type="password" id="passWord" th:field="*{passWord}" class="form-control"/><br/>
 	                <h5 style="color:red" th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}">Password Required</h5>
 	            </div>
 	            <button type="submit" class="btn btn-primary">Register</button>

@@ -4,13 +4,15 @@ import java.util.List;
 
 import com.gcu.model.ProductModel;
 
-public interface MenuServiceInterface {
+public interface ProductServiceInterface {
 
 	public void test();
 	
-	public List<ProductModel> getMenuItems();
-	public void updateMenu(ProductModel product);
+	public List<ProductModel> getProductItems();
+	
+	public void updateProducts(ProductModel product);
 	
 	public void init();
+	
 	public void destroy();
 }

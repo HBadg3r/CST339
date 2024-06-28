@@ -9,7 +9,8 @@
 
   </head>
   
-  <body layout:fragment="content">		
+  <body layout:fragment="content">	
+		<h3 th:if="${error}">Error: <span th:text="${error}">Error Message</span></h3>
 		<form align ="center" th:action="@{/login}" th:object="${loginForm}" method="post">
 			<label for="username"> USERNAME</label>
 			<input type="text" id="username" name="username" autofocus="autofocus"/>
