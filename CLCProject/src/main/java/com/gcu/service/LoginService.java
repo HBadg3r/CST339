@@ -63,13 +63,12 @@ public class LoginService implements LoginServiceInterface
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		System.out.println("Initialize");
+		System.out.println("Initialize Login Service");
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		System.out.println("Destroy");
+		System.out.println("Destroy Login Service");
 	}
 	
 	
