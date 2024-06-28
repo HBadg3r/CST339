@@ -9,6 +9,7 @@ public class RegistrationService implements RegistrationServiceInterface {
 	@Override
 	public void register(UserModel model, LoginServiceInterface loginService) {
 		loginService.addUser(model);
+		System.out.println("Registering user " + model.toString());
 	}
 	
 	@Override
@@ -16,7 +17,7 @@ public class RegistrationService implements RegistrationServiceInterface {
 		List<UserModel> users = loginService.getUsers();
 		
 		for (UserModel currentUser : users) {
-			if (currentUser.getUserName().equals(user.getUserName()) ) {
+			if (currentUser.getUserName().equals(user.getUserName()) || currentUser.getEmail().equals(user.getEmail()) ) {
 				return false;
 			}
 		}
@@ -25,14 +26,12 @@ public class RegistrationService implements RegistrationServiceInterface {
 	
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		System.out.println("Initialize");
+		System.out.println("Initialize Registration Service");
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		System.out.println("Destroy");
+		System.out.println("Destroy Registration Service");
 	}
 
 

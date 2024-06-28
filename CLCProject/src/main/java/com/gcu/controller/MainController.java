@@ -52,7 +52,6 @@ public class MainController {
 	}
 
 	@GetMapping("/admin")
-
 	public String admin(Model model) {
 		
 	    ProductModel product = new ProductModel();
@@ -114,6 +113,7 @@ public class MainController {
 		    registerService.register(user, loginService);
 	    } else {
 	    	model.addAttribute("error", "User already exists!");
+	    	return "register";
 	    }
 	    
 	    return "redirect:/register?success";
