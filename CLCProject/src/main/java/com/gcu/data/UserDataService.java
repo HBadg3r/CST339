@@ -92,7 +92,24 @@ public class UserDataService implements DataAccessInterface<UserModel> {
      */
     @Override
     public boolean update(UserModel user) {
-        // Implement update functionality if needed
+        String sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_number = ?, pass_word = ? WHERE user_name = ?";
+        
+        try {
+            // Execute SQL Update
+            int rows = jdbcTemplateObject.update(sql, 
+                    user.getFirstName(), 
+                    user.getLastName(), 
+                    user.getEmail(), 
+                    user.getPhoneNumber(), 
+                    user.getPassWord(), 
+                    user.getUserName());
+            
+            // Return result of Update
+            return rows == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         return false;
     }
     
@@ -101,7 +118,18 @@ public class UserDataService implements DataAccessInterface<UserModel> {
      */
     @Override
     public boolean delete(UserModel user) {
-        // Implement delete functionality if needed
+        String sql = "DELETE FROM users WHERE user_name = ?";
+        
+        try {
+            // Execute SQL Delete
+            int rows = jdbcTemplateObject.update(sql, user.getUserName());
+            
+            // Return result of Delete
+            return rows == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         return false;
     }
 }
