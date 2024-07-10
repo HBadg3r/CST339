@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 public class UserController {
 
     @Autowired
-    private UserInterface service;
+    private UserService service;
     
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -28,7 +28,7 @@ public class UserController {
             return "register";
         }
 
-        service.register(user);
+        service.registerUser(user);
         
         return "redirect:/register?success";
     }
