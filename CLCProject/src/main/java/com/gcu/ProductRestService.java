@@ -25,7 +25,7 @@ public class ProductsRestService
 	{
 		try
 		{
-			List<ProductModel> products = service.getAllProducts();
+			List<ProductModel> products = service.getProductItems();
 			if(products.isEmpty())
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			else
