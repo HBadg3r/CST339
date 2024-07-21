@@ -81,3 +81,7 @@ p {
 .logo {
 	width: 30%;
 }
+
+li {
+	list-style-type: none;
+}

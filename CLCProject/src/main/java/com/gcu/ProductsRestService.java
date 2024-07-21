@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gcu.model.ProductModel;
+import com.gcu.service.ProductService;
+
 @RestController
 public class ProductsRestService 
 {
@@ -29,7 +32,7 @@ public class ProductsRestService
 			if(products.isEmpty())
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			else
-				return new ResponseEntity<>(users, HttpStatus.OK);
+				return new ResponseEntity<>(products, HttpStatus.OK);
 		}
 		catch (Exception e)
 		{

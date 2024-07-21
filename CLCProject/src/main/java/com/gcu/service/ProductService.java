@@ -44,4 +44,9 @@ public class ProductService implements ProductServiceInterface {
 		System.out.println("ProductService destroy");
 		
 	}
+
+	public ProductModel findById(int id) {
+		ProductModel product = service.findById(id);
+		return product;
+	}
 }

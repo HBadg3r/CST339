@@ -58,8 +58,15 @@ public class MainController {
 	    BindingResult bindingResult = new BeanPropertyBindingResult(product, "product");
 	    model.addAttribute("product", product);
 	    model.addAttribute("org.springframework.validation.BindingResult.product", bindingResult);
-	    return "admin";
+	    return "product";
 
+	}
+	
+	@GetMapping("/addProduct")
+	public String addProduct(Model model) {
+		model.addAttribute("title", "Add Product");
+		
+		return "addProduct";
 	}
 
 	@PostMapping("/login")
