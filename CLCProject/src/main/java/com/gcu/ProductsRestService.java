@@ -10,22 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ProductRestService 
+public class ProductsRestService 
 {
-  @Autowired
-  private ProductService service;
+	@Autowired
+	private ProductService service;
 	
 	@Autowired
-    public ProductRestService(ProductService service) {
+	public ProductsRestService(ProductService service) 
+	{
         this.service = service;
-    }
+    	}
 	
-	public ResponseEntity<?> getProductById(int id)
+	public ResponseEntity<?> getProducts()
 	{
 		try
 		{
-			List<ProductModel> product = service.getProductById(id);
-			if(product.isEmpty())
+			List<ProductModel> products = service.getProductItems();
+			if(products.isEmpty())
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			else
 				return new ResponseEntity<>(users, HttpStatus.OK);
