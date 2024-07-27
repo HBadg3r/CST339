@@ -12,6 +12,10 @@ public interface ProductServiceInterface {
 	
 	public void updateProducts(ProductModel product);
 	
+	public void update(ProductModel product);
+	
+	public void delete(ProductModel product);
+	
 	public void init();
 	
 	public void destroy();

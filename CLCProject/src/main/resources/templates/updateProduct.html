@@ -5,15 +5,16 @@
     <title>Update Product</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
   </head>
-  <body>
+  <body layout:fragment="content">
     <div class="container">
       <div class="col-sm-6">
         <h2 style="text-align:center">Update Product</h2>
         <form th:action="@{/updateProduct}" th:object="${product}" method="post">
           <div class="form-group">
-            <label for="id">ID</label>
-            <input type="number" id="id" th:field="*{id}" class="form-control"/><br/>
-            <h5 style="color:red" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">ID Required</h5>
+            <label for="productId">Select Product</label>
+            <select id="productId" th:field="*{id}" class="form-control">
+              <option th:each="p : ${products}" th:value="${p.id}" th:text="${p.name}">Select Product</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="name">Name</label>

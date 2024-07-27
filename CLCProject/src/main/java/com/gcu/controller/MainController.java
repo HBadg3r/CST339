@@ -1,5 +1,8 @@
 package com.gcu.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,28 +32,31 @@ public class MainController {
 	@Autowired
 	private LoginServiceInterface loginService;
 	
+	/*
+	 * THE FOLLOWING CONTROLLER IS FOR THE HOME PAGE
+	 */
 	@GetMapping("/")
 	public String home(Model model) {
 	    model.addAttribute("title", "Home");
 	    return "index";
 	}
 
-	@GetMapping("/login")
-	public String login(Model model) {
-	    model.addAttribute("title", "Login");
-	    return "login";
-	}
 
+	/*
+	 * THE FOLLOWING CONTORLLER IS FOR THE MENU PAGE
+	 */
+	
 	@GetMapping("/menu")
-	public String menu(Model model) {
-		
-		productService.test();
-		
+	public String menu(Model model) {		
 	    model.addAttribute("title", "Menu");
 	    model.addAttribute("menuItems", productService.getProductItems());
 	    return "menu";
 	}
 
+	/*
+	 * THE FOLLWOING CONTROLLER IS FOR THE ADMIN PAGE
+	 */
+	
 	@GetMapping("/admin")
 	public String admin(Model model) {
 		
@@ -61,14 +67,17 @@ public class MainController {
 	    return "product";
 
 	}
-	
-	@GetMapping("/addProduct")
-	public String addProduct(Model model) {
-		model.addAttribute("title", "Add Product");
-		
-		return "addProduct";
-	}
 
+	/*
+	 * THE FOLLOWING CONTORLLERS AID LOGIN
+	 */
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+	    model.addAttribute("title", "Login");
+	    return "login";
+	}
+	
 	@PostMapping("/login")
 	public String login(@ModelAttribute(name="LoginForm") LoginService loginForm, Model model)
 	{
@@ -90,20 +99,12 @@ public class MainController {
 		
 		return "index";
 	}
-
-	@PostMapping("/addProduct")
-
-	public String addProduct(@ModelAttribute("product") @Valid ProductModel product, BindingResult bindingResult, Model model) {
-
-	    if (bindingResult.hasErrors()) {
-	        return "admin"; // return to the same page with errors
-	    }
-	    productService.updateProducts(product);
-	    return "admin"; // redirect to the admin page after successful addition
-
-	}
-
-
+	
+	
+	/*
+	 * THE FOLLOWING CONTROLLERS AID REGISTRATION
+	 */
+	
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
 	    model.addAttribute("user", new UserModel());
@@ -124,5 +125,87 @@ public class MainController {
 	    }
 	    
 	    return "redirect:/register?success";
+	}
+	
+	/*
+	 * THE FOLLOWING CONTROLLERS AID PRODUCT MANAGEMENT
+	 */
+	
+	//PRODUCT PAGE
+	@GetMapping("/addProduct")
+	public String addProduct(Model model) {
+		ProductModel product = new ProductModel();
+		model.addAttribute("product", product);
+		model.addAttribute("title", "Add Product");
+		
+		return "addProduct";
+	}
+	
+	@PostMapping("/addProduct")
+	public String addProduct(@ModelAttribute("product") ProductModel product, BindingResult result) {
+	    if (result.hasErrors()) {
+	        return "addProduct"; // Return to the same page if there are errors
+	    }
+	    // Add the product to the database or perform any other business logic
+	    productService.updateProducts(product);
+	    return "redirect:/displayProduct"; // Redirect to the products page after successful addition
+	}
+	
+	//VIEW PRODUCT PAGE
+	@GetMapping("/displayProduct")
+	public String displayProduct(Model model) {
+		List<ProductModel> products = new ArrayList<ProductModel>();
+		products = productService.getProductItems();		
+		model.addAttribute("title", "View Products");
+		model.addAttribute("products", products);
+		return "displayProduct";
+	}
+	
+	//UPDATE PRODUCT PAGE
+	@GetMapping("/updateProduct")
+	public String updateProduct(Model model) {
+		List<ProductModel> products = new ArrayList<ProductModel>();
+		products = productService.getProductItems();
+		ProductModel product = new ProductModel();
+		
+		model.addAttribute("product", product);
+		model.addAttribute("title", "Update Product");
+		model.addAttribute("products", products);
+		
+		return "updateProduct";
+	}
+	
+	@PostMapping("/updateProduct")
+	public String updateProduct(@ModelAttribute("product") ProductModel product, BindingResult result) {
+	    if (result.hasErrors()) {
+	        return "updateProduct"; // Return to the same page if there are errors
+	    }
+	    // Add the product to the database or perform any other business logic
+	    productService.update(product);
+	    return "redirect:/displayProduct"; // Redirect to the products page after successful addition
+	}
+	
+	//DELETE PRODUCT PAGE
+	@GetMapping("/deleteProduct")
+	public String deleteProduct(Model model) {
+		List<ProductModel> products = new ArrayList<ProductModel>();
+		products = productService.getProductItems();
+		ProductModel product = new ProductModel();
+		
+		model.addAttribute("product", product);
+		model.addAttribute("title", "Delete Product");
+		model.addAttribute("products", products);
+		
+		return "deleteProduct";
+	}
+	
+	@PostMapping("/deleteProduct")
+	public String deleteProduct(@ModelAttribute("product") ProductModel product, BindingResult result) {
+	    if (result.hasErrors()) {
+	        return "deleteProduct"; // Return to the same page if there are errors
+	    }
+	    // Add the product to the database or perform any other business logic
+	    productService.delete(product);
+	    return "redirect:/displayProduct"; // Redirect to the products page after successful addition
 	}
 }

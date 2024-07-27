@@ -24,12 +24,20 @@ public class ProductService implements ProductServiceInterface {
 		service.create(product);
 	}
 	
+	@Override
+	public void update(ProductModel product) {
+		service.update(product);
+	}
+
+	@Override
+	public void delete(ProductModel product) {
+		service.delete(product);
+	}
 	
 	@Override
 	public List<ProductModel> getProductItems() {
 		List<ProductModel> products = new ArrayList<ProductModel>();
 		products = service.findAll();
-		
 		return products;
 	}
 
